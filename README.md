@@ -39,11 +39,6 @@ Our project ([GitHub](https://github.com/aldenyue/ECE-148-F22-Team-9-Final-Proje
 
 [![IMAGE_ALT](https://img.youtube.com/vi/AvcmKMhhHGw/0.jpg)](https://www.youtube.com/watch?v=AvcmKMhhHGw)
 
-# Presentation Slides
-
-[Project Proposal and Updates](https://docs.google.com/presentation/d/1EkgtFs-FNyzEfarSJcummAluH30jZ4wbm4ckeikLcYE/edit?usp=sharing)
-
-[Final Presentation](https://docs.google.com/presentation/d/1usfxWdM53N0NMDoix_1Y74fKl12m3J9-bZNlBl0dWzA/edit?usp=sharing)
 
 ## Installation
 
@@ -60,11 +55,17 @@ pip install threading
 
 ## Usage
 
-Run the application
+Run the application. You may need to tune the steering proportion and offset. This will vary from car to car.
 
 ```
 python3 therapy.py
 ```
+
+# Presentation Slides
+
+[Project Proposal and Updates](https://docs.google.com/presentation/d/1EkgtFs-FNyzEfarSJcummAluH30jZ4wbm4ckeikLcYE/edit?usp=sharing)
+
+[Final Presentation](https://docs.google.com/presentation/d/1usfxWdM53N0NMDoix_1Y74fKl12m3J9-bZNlBl0dWzA/edit?usp=sharing)
 
 # Special Thanks
 For their assistance and guidance throughout the course we'd like to thank:
