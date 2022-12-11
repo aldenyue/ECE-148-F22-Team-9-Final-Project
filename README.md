@@ -1,40 +1,46 @@
 # ECE 148 Fall 2022 Team 9 Final Project
 
-## Emotional Support Robot
+## Project Team Members
 
-This demo recognizes facial emotions (`neutral`, `happy`, `sad`, `surprise`, `anger`). Demo uses [face-detection-retail-0004](https://docs.openvino.ai/2021.4/omz_models_model_face_detection_retail_0004.html) model to detect faces, crops them on the device using Script node, and then sends face frames to [emotions-recognition-retail-0003](https://docs.openvino.ai/2021.4/omz_models_model_emotions_recognition_retail_0003.html) model which estimates emotions.
+**Alden Yue** - ECE
 
-## Demo
+**Alexi Moretti** - MAE
 
-![Demo](https://user-images.githubusercontent.com/18037362/159129815-f41b2863-67c4-4e6c-a1b5-54a78cc6b8a8.png)
+**Victor Dabier** - UPS (MAE)
 
-### How it works
+## Donkey Autonomous Laps
+[![IMAGE_ALT](https://img.youtube.com/vi/ZR26M5cjA0k/0.jpg)](https://www.youtube.com/watch?v=ZR26M5cjA0k)
 
-1. Color camera produces high-res frames, sends them to host, Script node and downscale ImageManip node
-2. Downscale ImageManip will downscale from high-res frame to 300x300, required by 1st NN in this pipeline; object detection model
-3. 300x300 frames are sent from downscale ImageManip node to the object detection model (MobileNetSpatialDetectionNetwork)
-4. Object detections are sent to the Script node
-5. Script node first syncs object detections msg with frame. It then goes through all detections and creates ImageManipConfig for each detected face. These configs then get sent to ImageManip together with synced high-res frame
-6. ImageManip will crop only the face out of the original frame. It will also resize the face frame to required size (64,64) by the emotions recognition NN model
-7. Face frames get send to the 2nd NN - emotions NN model. NN recognition results are sent back to the host
-8. Frames, object detections, and recognition results are all **synced on the host** side and then displayed to the user
+## Python OpenCV Autonomous Laps
+[![IMAGE_ALT](https://img.youtube.com/vi/J2YAsO08PNM/0.jpg)](https://www.youtube.com/watch?v=J2YAsO08PNM)
 
-## 2-stage NN pipeline graph
 
-![image](https://user-images.githubusercontent.com/18037362/179375207-1ccf27a6-59bb-4a42-8cae-d8908c4ed51a.png)
+# Project Overview
+Our project is a emotional support robot that can detect the emotions from people's faces. The robot runs on a Jetson Nano and uses an OAK-D Lite Camera for recognition and distance measurements. We use [DepthAI's emotional recognition example](https://github.com/luxonis/depthai-experiments/tree/master/gen2-face-recognition) for our detection. The robot searches for the face of a sad person, and once confirmed, drives up to the person in question to cheer them up! The therapy routine consists of both music and a dance.
 
-[DepthAI Pipeline Graph](https://github.com/geaxgx/depthai_pipeline_graph#depthai-pipeline-graph-experimental) was used to generate this image.
 
-## Installation
+## Systems Schematic
 
-```
-python3 -m pip install -r requirements.txt
-```
+![Electrical Schematic](https://drive.google.com/uc?id=16STPfSgdp4dcYqTMlH768Pb_0goI1n9z)
 
-## Usage
 
-Run the application
+## Car Photos
+![Robot Photo](https://drive.google.com/uc?id=1uZXIZ-YuC2d-TIJ2R0jUVjr4fN1DzG7K)
 
-```
-python3 main.py
-```
+
+![Robot Photo](https://drive.google.com/uc?id=1MWcDF949sBMB3130ppiVEH3RVC3zkgD5)
+
+
+![Robot Photo](https://drive.google.com/uc?id=1X5kv9UvqkTD7hZ3HumCEHSHAGP8YqOpl)
+
+
+
+## Therapy Demo
+
+[![IMAGE_ALT](https://img.youtube.com/vi/AvcmKMhhHGw/0.jpg)](https://www.youtube.com/watch?v=AvcmKMhhHGw)
+
+## Presentation Slides
+
+[Project Proposal and Updates](https://docs.google.com/presentation/d/1EkgtFs-FNyzEfarSJcummAluH30jZ4wbm4ckeikLcYE/edit?usp=sharing)
+
+[Final Presentation](https://docs.google.com/presentation/d/1usfxWdM53N0NMDoix_1Y74fKl12m3J9-bZNlBl0dWzA/edit?usp=sharing)
