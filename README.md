@@ -4,7 +4,7 @@
 
 **Alden Yue** - ECE
 
-**Alexi Moretti** - MAE
+**Alex Moretti** - MAE
 
 **Victor Dabier** - UPS (MAE)
 
