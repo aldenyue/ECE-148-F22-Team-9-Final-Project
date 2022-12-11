@@ -6,6 +6,12 @@ import numpy as np
 import time
 from playsound import playsound
 import pyvesc
+import threading
+
+# make sure you install all of the libraries after installing the requirements
+
+def play_music(music):
+    threading.Thread(target=playsound, args=(music,), daemon=True).start()
 
 class VESC:
     ''' 
@@ -61,8 +67,10 @@ class VESC:
         self.v.set_servo((angle * self.steering_scale) + self.steering_offset)
         self.v.set_duty_cycle(throttle*self.percent)
 
-playsound('madworld.mp3', False)
 
+Vesc_object = VESC('/dev/ttyACM0')
+# Straighten Car out
+Vesc_object.run(0.5, 0)
 def frame_norm(frame, bbox):
     normVals = np.full(len(bbox), frame.shape[0])
     normVals[::2] = frame.shape[1]
@@ -250,6 +258,7 @@ with dai.Device() as device:
     sad_count = 0
     x = 0
     y = 0
+    z = 0
     while True:
         for name, q in queues.items():
             # Add all msgs (color frames, object detections and age/gender recognitions) to the Sync class.
@@ -286,6 +295,7 @@ with dai.Device() as device:
                 cv2.putText(frame, emotion_name, (bbox[0], y), cv2.FONT_HERSHEY_TRIPLEX, 1.5, (255, 255, 255), 2)
                 if stereo:
                     # You could also get detection.spatialCoordinates.x and detection.spatialCoordinates.y coordinates
+                    z= detection.spatialCoordinates.z/1000
                     coords = "Z: {:.2f} m".format(detection.spatialCoordinates.z/1000)
                     cv2.putText(frame, coords, (bbox[0], y + 35), cv2.FONT_HERSHEY_TRIPLEX, 1, (0, 0, 0), 8)
                     cv2.putText(frame, coords, (bbox[0], y + 35), cv2.FONT_HERSHEY_TRIPLEX, 1, (255, 255, 255), 2)
@@ -297,15 +307,36 @@ with dai.Device() as device:
             print('Sadness Detected at:' + str(x) + ', ' + str(y))
 
             # proportion to convert frame difference to steering input
+            # Specifications: range ~ 2.5-5 meters,  FOV: 40 degrees
 
             # FOV angle is from 70 - 110 degrees
             # (y - 540)/5 
 
+            # Need to tune steering offset and proportional constant (also consider a seperate constant for left and right turns) varies from car to car
+            offset = -0.02
+            p = 0.6
 
-            p = 1
+            # turn input based on distance from the center of the image
+            turn_input = 0.5 + p*(x-540)/(1080*5) - offset
 
-            turn_input = 0.5 + p*(y-540)/(1080*5)
+            print('turn input: ' + str(turn_input))
+            drive_time = z*5/3
 
-            print(turn_input)
+            Vesc_object.run(turn_input, 0.1)
+
+            time.sleep(drive_time)
+            
+            Vesc_object.run(0.5, 0)
+
+            play_music('brightside.mp3')
+
+            time.sleep(3)
+
+            # Dance Time :)
+            for i in range(300):
+                Vesc_object.run(0.25, 0)
+                time.sleep(1)
+                Vesc_object.run(0.75, 0)
+                time.sleep(1)
 
             break
