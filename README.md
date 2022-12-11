@@ -16,7 +16,7 @@
 
 
 # Project Overview
-Our project ([GitHub](https://github.com/aldenyue/ECE-148-F22-Team-9-Final-Project)) is a emotional support robot that can detect the emotions from people's faces. The robot runs on a Jetson Nano and uses an OAK-D Lite Camera for recognition and distance measurements. We use [DepthAI's emotional recognition example](https://github.com/luxonis/depthai-experiments/tree/master/gen2-face-recognition) for our detection. The robot searches for the face of a sad person, and once confirmed, drives up to the person in question to cheer them up! The therapy routine consists of both music and a dance.
+Our project ([GitHub](https://github.com/aldenyue/ECE-148-F22-Team-9-Final-Project)) is a emotional support robot that can detect the emotions from people's faces. The robot runs on a Jetson Nano and uses an OAK-D Lite Camera for recognition and distance measurements. We use [DepthAI's emotional recognition example](https://github.com/luxonis/depthai-experiments/tree/master/gen2-emotion-recognition) for our detection. The robot searches for the face of a sad person, and once confirmed, drives up to the person in question to cheer them up! The therapy routine consists of both music and a dance.
 
 
 ## Systems Schematic
@@ -44,6 +44,27 @@ Our project ([GitHub](https://github.com/aldenyue/ECE-148-F22-Team-9-Final-Proje
 [Project Proposal and Updates](https://docs.google.com/presentation/d/1EkgtFs-FNyzEfarSJcummAluH30jZ4wbm4ckeikLcYE/edit?usp=sharing)
 
 [Final Presentation](https://docs.google.com/presentation/d/1usfxWdM53N0NMDoix_1Y74fKl12m3J9-bZNlBl0dWzA/edit?usp=sharing)
+
+## Installation
+
+```
+python3 -m pip install -r requirements.txt
+
+# Install these packages as well
+
+pip install time
+pip install playsound
+pip install pyvesc
+pip install threading
+```
+
+## Usage
+
+Run the application
+
+```
+python3 therapy.py
+```
 
 # Special Thanks
 For their assistance and guidance throughout the course we'd like to thank:
